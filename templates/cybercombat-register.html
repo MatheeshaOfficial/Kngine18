@@ -1,0 +1,76 @@
+<p class="text-muted">*Most Wanted registration will be available at Kngine'18</p>
+<form action="{{ url_for('register_gaming') }}" method="post" class="move-left">
+    <h4>Team's Details</h4>
+    <div class="form-group">
+        <label for="school">School Name</label>
+        <input type="text" class="form-control" id="school" name="school" placeholder="Enter School Name" required>
+    </div>
+    <div class="form-group">
+        <label for="team-name">Team Name</label>
+        <input type="text" class="form-control" id="team-name" name="team-name" placeholder="Enter Team Name" required>
+    </div>
+    <hr/>
+    <h4>Team Leader's Details</h4>
+    <div class="form-group">
+        <label for="leader-name">Team Leader's Name</label>
+        <input type="text" class="form-control" id="leader-name" name="leader-name" placeholder="Enter Team Leader's Name" required>
+    </div>
+    <div class="form-group">
+        <label for="leader-ign">Team Leader's IGN</label>
+        <input type="text" class="form-control" id="leader-ign" name="leader-ign" placeholder="Enter Team Leader's IGN" required>
+    </div>
+    <div class="form-group">
+        <label for="leader-email">Team Leader's Email</label>
+        <input type="email" class="form-control" id="leader-email" name="leader-email" placeholder="Enter Team Leader's Email" required>
+    </div>
+    <div class="form-group">
+        <label for="leader-telephone">Team Leader's Telephone Number</label>
+        <input type="tel" class="form-control" id="leader-telephone" name="leader-telephone" placeholder="Enter Team Leader's Telephone Number" required>
+    </div>
+    <hr/>
+    {% for n in range(1,5) %}
+        <h4>Player #{{ n }}'s Details</h4>
+        <div class="form-group">
+            <label for="player{{ n }}-name">Player #{{ n }} Name</label>
+            <input type="text" class="form-control" id="player{{ n }}-name" name="player{{ n }}-name" placeholder="Enter Player {{ n }}'s Name" required>
+        </div>
+        <div class="form-group">
+            <label for="player{{ n }}-ign">Player #{{ n }} IGN</label>
+            <input type="text" class="form-control" id="player{{ n }}-ign" name="player{{ n }}-ign" placeholder="Enter Player {{ n }}'s IGN" required>
+        </div>
+        <div class="form-group">
+            <label for="player{{ n }}-email">Player #{{ n }} Email</label>
+            <input type="email" class="form-control" id="player{{ n }}-email" name="player{{ n }}-email" placeholder="Enter Player {{ n }}'s Email" required>
+        </div>
+        <div class="form-group">
+            <label for="player{{ n }}-telephone">Player #{{ n }} Telephone Number</label>
+            <input type="tel" class="form-control" id="player{{ n }}-telephone" name="player{{ n }}-telephone" placeholder="Enter Player {{ n }}'s Telephone Number" required>
+        </div>
+        <hr/>
+    {% endfor %}
+
+    <h4>Substitute Player's Details (optional)</h4>
+    <div class="form-group">
+        <label for="substitute-name">Substitute Player Name</label>
+        <input type="text" class="form-control" id="substitute-name" name="substitute-name" placeholder="Enter Substitute Player's Name">
+    </div>
+    <div class="form-group">
+        <label for="player{{ n }}-ign">Player #{{ n }} IGN</label>
+        <input type="text" class="form-control" id="substitute-ign" name="substitute-ign" placeholder="Enter Substitute Player's IGN">
+    </div>
+    <div class="form-group">
+        <label for="player{{ n }}-email">Player #{{ n }} Email</label>
+        <input type="email" class="form-control" id="substitute-email" name="substitute-email" placeholder="Enter Substitute Player's Email">
+    </div>
+    <div class="form-group">
+        <label for="substitute-telephone">Player #{{ n }} Telephone Number</label>
+        <input type="tel" class="form-control" id="substitute-telephone" name="substitute-telephone" placeholder="Enter Substitute Player's Telephone Number">
+    </div>
+    <hr/>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="iagree" required>
+        <label class="form-check-label" for="iagree">I read all rules and I accept to obey all the rules and and I take the responsibility of being disqualified if any member of my team breaks the mentioned rules</label>
+    </div>
+    <br/>
+    <div class="text-center"><input type="submit" class="btn btn-danger" value="Submit Application"></div>
+</form>

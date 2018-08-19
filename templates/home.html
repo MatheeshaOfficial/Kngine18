@@ -1,0 +1,272 @@
+{% extends "header.html" %}
+
+{% block body %}
+    {% include memes[0] %}
+    <div class="container video">
+        <video autoplay muted loop style="height: auto; width: 100%;" poster="{{ url_for('static', filename='media/intro.jpg') }}">
+            <source src="{{ url_for('static', filename='media/intro.mp4') }}" type="video/mp4" />
+            <source src="{{ url_for('static', filename='media/intro.webm') }}" type="video/webm" />
+        </video>
+    </div>
+
+    <!-- Competitions -->
+    <section id="competition">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Competitions</h2>
+            <h3 class="section-subheading text-muted">Submit your projects before<br/>23:59 17 February 2018</h3>
+          </div>
+        </div>
+        <div class="row text-center">
+            {% for competition in competitions %}
+              <div class="col" style="padding-top: 50px; padding-left: 25px; padding-right: 25px;">
+                <img src="{{ url_for('static', filename='img/logos/'+competition.id+'.png') }}" width="300">
+                <h4 class="service-heading">{{ competition.name }}</h4>
+                <p class="text-muted">{{ competition.info }}</p>
+                  {% if competition.register %}
+                <a data-toggle="modal" href="#{{ competition.id }}-register"><button type="button" class="btn btn-danger">Register</button></a>
+                  {% endif %}
+                <a data-toggle="modal" href="#{{ competition.id }}-info"><button type="button" class="btn btn-success">More Info</button></a>
+              </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% include memes[1] %}
+    <!-- Portfolio Grid -->
+    <section class="bg-light" id="gallery">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Throwbacks</h2>
+            <h3 class="section-subheading text-muted">Photos of Past Kngine Events</h3>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+            {% for image in portfolio %}
+                <div class="col-md-4 portfolio-item">
+                    <img class="img-fluid" src="static/img/gallery/{{ image.href }}" alt="Image of {{ image.title }}">
+                    <div class="portfolio-caption">
+                        <p></p>
+                        <h4 align="center">{{ image.title }}</h4>
+                        <p class="text-muted" align="center">{{ image.caption }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- Lectures -->
+    <section id="lectures">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Featuring</h2>
+          </div>
+        </div>
+        <div class="row">
+            {% for lecturer in lectures %}
+                <div class="col">
+                <div class="lectures">
+                  <img class="mx-auto rounded-circle" src="{{ url_for('static', filename='img/lectures/'+lecturer.img) }}" alt="Image of {{ lecturer.name }}">
+                  <h4>{{ lecturer.name }}</h4>
+                  <p class="text-muted">{{ lecturer.caption }}</p>
+                  <ul class="list-inline social-buttons">
+                    <li class="list-inline-item">
+                      <a href="{{ lecturer.twitter }}">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="{{ lecturer.facebook }}">
+                        <i class="fa fa-facebook"></i>
+                      </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="{{ lecturer.linkedin }}">
+                        <i class="fa fa-linkedin"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% include memes[2] %}
+    <!-- About -->
+    <section class="bg-light" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">About Us</h2>
+                    <h3 class="section-subheading text-muted">Who Are WE ?</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>RITS, Richmond College IT Society inaugurated few decades ago,
+                    has now dominated every school IT Societies around the island,
+                    doing an evolutionary change in the horizon of the school ICT
+                    field. RITS has shown their exellence in the vast technological
+                    field by competing with all the leading ICT societies in the schools.</p>
+
+                    <p>The Richmond College IT Society has now developed with the
+                    newest and timely technology and knowledge to achieve any
+                    target combined with our spirit and the huge co-operation of
+                    former members and teachers.</p>
+
+                    <p>The next phase of our annual celebrations;
+                    The Knowledge Engine 2018
+                    comes out with a comprehensive conecpt this time.</p>
+
+                    <p>KNGINE’18 stands with the professional ICT knowledge and the
+                    skills to be shared with all the master IT minds around us and
+                    it has become the reflection and the
+                    unrivalled nobilty of our ICT Society.</p>
+                </div>
+                <div class="col-lg-3">
+                    <img src="{{ url_for('static', filename='img/school.jpg') }}" height="400px">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if sponsors  is defined %}
+    <!-- Sponsors -->
+      <div class="container">
+        <div class="row text-center">
+            {% for sponsor in sponsors %}
+                <div class="col">
+                    <img src="static/img/logos/{{ sponsor }}.png" alt="logo of {{ sponsor }}" height="100px">
+                </div>
+            {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    {% include memes[3] %}
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">Contact Us</h2>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form action="{{ url_for('contact') }}" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" id="name" name="name" type="text" placeholder="Your Name *" required>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="Your Email *" required>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="phone" name="phone" type="tel" placeholder="Your Phone *" required>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="message" name="message" placeholder="Your Message *" required></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <ul class="move-left list-unstyled">
+                                            <li class="text-white">Sameera Kariyawasam (MIC)</li>
+                                            <li class="text-white">Sasindu (President)</li>
+                                            <li class="text-white">Malindu (Chief Organizer)</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <ul class="move-left list-unstyled">
+                                            <li class="text-white">- +94711697374</li>
+                                            <li class="text-white">- +94765748314</li>
+                                            <li class="text-white">- +94766282034</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="text-center"><input type="submit" class="btn btn-xl btn-success" value="Send Message"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Map -->
+    <section id="map" class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15870.311262881738!2d80.2048372!3d6.0525075!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd9c5ef5a5f92100b!2sRichmond+College!5e0!3m2!1sen!2slk!4v1516638563999" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </section>
+    <!-- End Google Map -->
+
+    {% for competition in competitions %}
+        {% if competition.register %}
+        <div class="kngine-modal modal fade" id="{{ competition.id }}-register" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-dismiss="modal">
+                        <div class="lr">
+                            <div class="rl"></div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="modal-body">
+                                    <h3 class="text-uppercase">{{ competition.name }}</h3>
+                                    <p class="item-intro text-muted">{{ competition.info }}</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/logos/'+competition.id+'.png') }}" alt="Logo of {{ competition.name }}">
+                                    <hr/>
+                                    <p>{{ competition.description }}</p>
+                                    {% include competition.id+'-register.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="kngine-modal modal fade" id="{{ competition.id }}-info" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-dismiss="modal">
+                        <div class="lr">
+                            <div class="rl"></div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 mx-auto">
+                                <div class="modal-body">
+                                    <h3 class="text-uppercase">{{ competition.name }}</h3>
+                                    <p class="item-intro text-muted">{{ competition.info }}</p>
+                                    <img class="img-fluid d-block mx-auto" src="{{ url_for('static', filename='img/logos/'+competition.id+'.png') }}" alt="Logo of {{ competition.name }}">
+                                    <hr/>
+                                    {% include competition.id+'-info.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
